@@ -39,7 +39,6 @@ public class NBA_Stats {
         for (int i = 0; i < teamUrls.size(); i++) {
             String x = teamUrls.get(i);
             x = x.substring(0, 27) + "/roster" + x.substring(27, x.length());
-            //System.out.println(x);
             
             org.jsoup.nodes.Document plyrs = Jsoup.connect(x).get();
             org.jsoup.select.Elements player_urls = plyrs.select(".sortcell");
@@ -51,12 +50,10 @@ public class NBA_Stats {
                 players.add(g.substring(beginIndex+1,endIndex));
             }            
         }
-        /*for (int i = 0; i < players.size(); i++){
-            System.out.println(players.get(i));
-        }*/
         
         org.jsoup.nodes.Document stat = Jsoup.connect(players.get(0)).get();
-        org.jsoup.select.Elements player_stats = stat.select(".mod-content td");
+        //org.jsoup.select.Elements player_stats = stat.select(".mod-content td");
+        org.jsoup.select.Elements player_stats = stat.select("[class^=oddrow team], [class^=evenrow team]");
         for (Element e : player_stats){
             String g = e.toString();
             stats.add(g);
