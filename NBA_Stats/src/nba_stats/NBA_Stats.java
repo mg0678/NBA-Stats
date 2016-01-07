@@ -51,14 +51,15 @@ public class NBA_Stats {
             }            
         }
         
-        org.jsoup.nodes.Document stat = Jsoup.connect(players.get(0)).get();
+        org.jsoup.nodes.Document stat = Jsoup.connect(players.get(1)).get();
         //org.jsoup.select.Elements player_stats = stat.select(".mod-content td");
-        org.jsoup.select.Elements player_stats = stat.select("[class^=oddrow team], [class^=evenrow team]");
+        //org.jsoup.select.Elements player_stats = stat.select("[class^=oddrow team], [class^=evenrow team]");
+        org.jsoup.select.Elements player_stats = stat.select("div.mod-content [class=oddrow]:eq(1)");
         for (Element e : player_stats){
             String g = e.toString();
             stats.add(g);
             System.out.println(g);
         }
-        System.out.println(players.get(0));
+        System.out.println(players.get(1));
     }
 }
